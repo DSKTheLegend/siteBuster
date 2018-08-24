@@ -13,4 +13,5 @@ It has a customizable range of extensions which you can change at your own wish.
         ## Verbose - Added on 25-Aug-2018
         ## Other Valid Status Codes [200,204,301,302,307] - Added on 25-Aug-2018
         ## Final List of Files / Directory Separately
+        ## False Positive
 ## TheLegend 
