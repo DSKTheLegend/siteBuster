@@ -2,6 +2,7 @@ import socket
 import optparse
 import requesocks
 
+
 def siteBurst(url,wordlist,status_code,verbose):
     
     fhandle = open(wordlist,'r')
@@ -15,20 +16,38 @@ def siteBurst(url,wordlist,status_code,verbose):
     #extention = ['','.asp','.aspx','.axd','.asx','.asmx','.ashx','.cfm','.css','.yaws','.swf','.html','.htm','.xhtml','.jhtml','.jsp','.jspx','.wss','.do','.action','.js','.pl','.php','.php4','.php3','.phtml','.py','.rb','.rhtml','.shtml','.xml','.rss','.svg','.cgi','.dll']
     #Keeping only commonly found extentions 
     extention = ['','.asp','.aspx','.css','.html','.htm','.jsp','.jspx','.js','.php','.php4','.php3','.xml']    
+    false_check = False # a flag to check if we are gettinng false positives or not 
     for word in words:
+        false_positive = 0   # a flag to count the number of extentions work for a single word phrase
         for ext in extention :
             req = requesocks.get(url+word+ext) # format -> [http://example.com][index][.html]
             code = req.status_code
-            if str(code) in status_code.split(','):
+            if str(code) in status_code.split(','): # if the site sends a positive response code
+                
                 print('')
-                if ext == '':
+                
+                                   
+                if ext == '':   #directory file
+                    false_positive = false_positive + 1
                     print("# ******** # "+url+word+ext + " directory found !")
                     print('')
-                else :
+                else :  #non-directory file
+                    false_positive = false_positive + 1
                     print("#==========# "+url+word+ext + " found !")
                     print('')
-                    
-            else :
+                if false_check is False:
+                    if false_positive > 4:
+                        print("We may be getting false positive results!.")
+                        print("Please check the above links manually and tell if those links are valid or not.")
+                        user_check = raw_input("Are the links valid ? (yes/no) :")
+                        print user_check
+                        print type(user_check)
+                        if user_check.lower() == "yes":
+                            false_check = True
+                        else:
+                            print("Sorry, please try to check for response codes manually and then provide them using -s <response codes>")
+                            quit()
+            else :   # if the site sends a negative response code
                 if bool(verbose) == True:
                     print("=# "+url+word+ext + " not found !")
                 else:    
@@ -62,11 +81,11 @@ def checker(url,port,wordlist,status_code,verbose):
     siteBurst(url,wordlist,status_code,verbose)  
         
 def main():
-    parser = optparse.OptionParser('usage: siteBuster.py ' + '-u <siteurl> -w <wordlist> [[-p <port>][-s <status_codes>][-v]')
+    parser = optparse.OptionParser('usage: siteBuster.py ' + '-u <siteurl> -w <wordlist> [[-p <port>][-s <response code>][-v]')
     parser.add_option('-u', dest='url',type='string',help='enter the url of the site you want to burst')
     parser.add_option('-p', dest='port',type='string',help='enter the port(if site is running on any port other than 80)')
     parser.add_option('-w', dest='wordlist',type='string',help='enter the path of the wordlist you want to use')
-    parser.add_option('-s', dest='status_code',type='string',help='enter status codes for which you want to verify (default is [200,204,301,302,307])')
+    parser.add_option('-s', dest='status_code',type='string',help='enter response codes for which you want to verify (default is [200,204,301,302,307])')
     parser.add_option('-v', dest='verbose',type='string',nargs=0,help='verbose',)
     (options,args) = parser.parse_args()
     
@@ -84,11 +103,11 @@ def main():
             port = options.port
         else:
             port = 80   #default port
-        #assigning status code    
+        #assigning response code    
         if options.status_code:
             status_code = options.status_code
         else:
-            status_code = "200,204,301,302,307" #default status codes    
+            status_code = "200,204,301,302,307" #default response codes    
         if options.verbose == None :
             verbose = False
         else:
