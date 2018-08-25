@@ -12,25 +12,25 @@ def siteBurst(url,wordlist,status_code,verbose):
         ## HTML   ## Java   ## Javascript    ## Perl      ## PHP
         ## Pthon  ## Ruby   ## SSI           ## XML
         ## Few Others ...
-    #extention = ['','.asp','.aspx','.axd','.asx','.asmx','.ashx','.cfm','.yaws','.swf','.html','.htm','.xhtml','.jhtml','.jsp','.jspx','.wss','.do','.action','.js','.pl','.php','.php4','.php3','.phtml','.py','.rb','.rhtml','.shtml','.xml','.rss','.svg','.cgi','.dll']
+    #extention = ['','.asp','.aspx','.axd','.asx','.asmx','.ashx','.cfm','.css','.yaws','.swf','.html','.htm','.xhtml','.jhtml','.jsp','.jspx','.wss','.do','.action','.js','.pl','.php','.php4','.php3','.phtml','.py','.rb','.rhtml','.shtml','.xml','.rss','.svg','.cgi','.dll']
     #Keeping only commonly found extentions 
-    extention = ['','.asp','.aspx','.html','.htm','.xhtml','.jhtml','.jsp','.jspx','.js','.php','.php4','.php3','.phtml','.rhtml','.shtml','.xml']    
+    extention = ['','.asp','.aspx','.css','.html','.htm','.jsp','.jspx','.js','.php','.php4','.php3','.xml']    
     for word in words:
         for ext in extention :
             req = requesocks.get(url+word+ext) # format -> [http://example.com][index][.html]
             code = req.status_code
             if str(code) in status_code.split(','):
-                print ''
+                print('')
                 if ext == '':
-                    print "# ******** # "+url+word+ext + " directory found !"
-                    print ''
+                    print("# ******** # "+url+word+ext + " directory found !")
+                    print('')
                 else :
-                    print "#==========# "+url+word+ext + " found !"
-                    print ''
+                    print("#==========# "+url+word+ext + " found !")
+                    print('')
                     
             else :
                 if bool(verbose) == True:
-                    print "=# "+url+word+ext + " not found !"
+                    print("=# "+url+word+ext + " not found !")
                 else:    
                     continue
                 
@@ -41,7 +41,6 @@ def checker(url,port,wordlist,status_code,verbose):
     try:
         s_post = url.find("://")
         host = url[s_post+3:len(url)-1]
-        print host
         mysock.connect((host,port))
         print("Host : "+host+" is Up!!")
         if port is not 80:
@@ -100,10 +99,18 @@ def main():
     if not url.endswith('/'):   # just a check
         url = url+'/'
     port = int(port)  
-    print "Bursting The Site : " +url
-    
-    
+    print("Bursting The Site : " +url)
     checker(url,port,wordlist,status_code,verbose)
 
 if __name__ == '__main__':
+    welcome = """
+         SSS    iii   TTTTT  EEEE        BBB    U   U   SSS   TTTTT  EEEE   RRRR
+        S        I      T    E           B  B   U   U  S        T    E      R   R
+        SSSS     I      T    Eee    ###  BBBB   U   U  SSSS     T    Eee    RrrR
+            S    I      T    E           B   B  U   U      S    T    E      R   R   
+        SSSS   IIIII    T    EEEEEE      BBBB    UUU   SSSS     T    EEEEEE R    R
+                                                                           
+                                                                               by TheLegend
+    """
+    print(welcome)
     main()
