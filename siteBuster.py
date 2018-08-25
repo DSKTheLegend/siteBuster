@@ -23,19 +23,14 @@ def siteBurst(url,wordlist,status_code,verbose):
             req = requesocks.get(url+word+ext) # format -> [http://example.com][index][.html]
             code = req.status_code
             if str(code) in status_code.split(','): # if the site sends a positive response code
-                
-                print('')
-                
-                                   
                 if ext == '':   #directory file
                     false_positive = false_positive + 1
-                    print("# ******** # "+url+word+ext + " directory found !")
+                    print("[+]"+url+word+ext + " directory found !")
                     print('')
                 else :  #non-directory file
                     false_positive = false_positive + 1
-                    print("#==========# "+url+word+ext + " found !")
-                    print('')
-                if false_check is False:
+                    print("[+]"+url+word+ext + " found !")
+                if false_check is False:        # False Positive Check
                     if false_positive > 4:
                         print("We may be getting false positive results!.")
                         print("Please check the above links manually and tell if those links are valid or not.")
@@ -52,7 +47,7 @@ def siteBurst(url,wordlist,status_code,verbose):
                     print("=# "+url+word+ext + " not found !")
                 else:    
                     continue
-                
+
 
 def checker(url,port,wordlist,status_code,verbose):
     #Checking is Site is alive or not
