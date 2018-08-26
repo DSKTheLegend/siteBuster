@@ -41,8 +41,6 @@ def siteBurst(url,wordlist,status_code,verbose):
                         print("We may be getting false positive results!.")
                         print("Please check the above links manually and tell if those links are valid or not.")
                         user_check = raw_input("Are the links valid ? (yes/no) :")
-                        print user_check
-                        print type(user_check)
                         if user_check.lower() == "yes":
                             false_check = True
                         else:
