@@ -1,4 +1,4 @@
-#siteBuster
+# siteBuster
 
 This is a light weight tool written in python which uses dictionary attack to check the available files on a website.
 It has a customizable range of extensions which you can change at your own wish.
