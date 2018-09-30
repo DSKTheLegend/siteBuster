@@ -12,9 +12,9 @@ def siteBurst(url,wordlist,status_code,verbose):
         ## HTML   ## Java   ## Javascript    ## Perl      ## PHP
         ## Pthon  ## Ruby   ## SSI           ## XML
         ## Few Others ...
-    #extention = ['','.asp','.aspx','.axd','.asx','.asmx','.ashx','.cfm','.css','.yaws','.swf','.html','.htm','.xhtml','.jhtml','.jsp','.jspx','.wss','.do','.action','.js','.pl','.php','.php4','.php3','.phtml','.py','.rb','.rhtml','.shtml','.xml','.rss','.svg','.cgi','.dll']
+    #extention = ['','.asp','.aspx','.axd','.asx','.asmx','.ashx','.cfm','.css','.yaws','.swf','.html','.htm','.xhtml','.jhtml','.jsp','.jspx','.wss','.do','.action','.js','.pl','.php','.php4','.php3','.phtml','.py','.rb','.rhtml','.shtml','.xml','.rss','.svg','.cgi','.dll','.txt']
     #Keeping only commonly found extentions 
-    extention = ['','.asp','.aspx','.css','.html','.htm','.jsp','.jspx','.js','.php','.php4','.php3','.xml']    
+    extention = ['','.asp','.aspx','.html','.php','.txt']    
     print("We have "+str(len(words)*len(extention))+" combinations to try!")
     false_check = False # a flag to check if we are gettinng false positives or not 
     directory = list()
@@ -37,7 +37,7 @@ def siteBurst(url,wordlist,status_code,verbose):
                     print("[+]  "+url+word+ext + " found !")
                     pages.append(url+word+ext)
                 if false_check is False:        # False Positive Check
-                    if false_positive > 4:
+                    if false_positive > 5:
                         print("We may be getting false positive results!.")
                         print("Please check the above links manually and tell if those links are valid or not.")
                         user_check = raw_input("Are the links valid ? (yes/no) :")
@@ -62,7 +62,7 @@ def siteBurst(url,wordlist,status_code,verbose):
     print("==="+"="*max([len(page) for page in pages])+"===")
     print('')
     
-    #Print the directories found
+    # Print the directories found
     print("==="+"="*max([len(folder) for folder in directory])+"===")
     print("Directories Found :")
     print("==="+"="*max([len(folder) for folder in directory])+"===")
@@ -150,3 +150,4 @@ if __name__ == '__main__':
     """
     print(welcome)
     main()
+    

@@ -7,12 +7,12 @@ It has a customizable range of extensions which you can change at your own wish.
 
 ## Under Development!
 
-Feel free to send a PR and contribute to the code. Your name will be added to the author's list.
+Feel free to send a PR and contribute to the code. Your name will be added to the contributer's list.
 
 
 
 ## Authors
-        : Abhishek Raha
+        : Abhishek Raha a.k.a TheLegend
 
 
 ### ToDo
@@ -25,4 +25,4 @@ Feel free to send a PR and contribute to the code. Your name will be added to th
         ## False Positive   
         
         
-## TheLegend 
+## TheLegend - Signing Out !!
