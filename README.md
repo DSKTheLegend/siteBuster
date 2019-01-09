@@ -12,7 +12,7 @@ Feel free to send a PR and contribute to the code. Your name will be added to th
 
 
 ## Authors
-        : Abhishek Raha a.k.a TheLegend
+        : TheLegend
 
 
 ### ToDo
